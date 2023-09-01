@@ -4,7 +4,7 @@ function Support() {
   return (
     <>
         <div className="w-full h-[180px] bg-[#F8F0E5]"></div>
-        <div className="w-full h-[650px] bg-[url('img/support-main.png')]">
+        <div className="support w-full h-[650px]">
             <div className="w-[1200px] pt-[150px] pl-[200px]" >
                 <div className="mb-[70px]">
                     <div className="text-[40px] text-[#F8F0E5]">여러분의 작은 손길로</div>
