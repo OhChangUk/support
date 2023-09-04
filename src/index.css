@@ -7,5 +7,10 @@ ul{list-style: none;}
 a{text-decoration: none; color: #000;}
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
-.support{background-image: url('img/support-main.png');
+.support{background-image: url('../public/img/support-main.png');}
+.full{background-image: url("../public/img/full.jpg"); background-size: cover; background-position: center top; background-attachment: fixed;}
+.info::after{
+    content: "";
+    position: absolute; border-bottom: 2px solid #DAC0A3;
+    width: 520px; bottom: 0; left: -10px;
 }
