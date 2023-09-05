@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { styled } from 'styled-components';
 
 function Info() {
+
   const NumChk = (e)=>{
-    // console.log(e.target.value);
-    return e.target.value = e.target.value.replace(/[^0-9.]/g, '')
+    return e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
+  
+  
   return (
     <>
         <div className="full w-full">
@@ -31,7 +34,7 @@ function Info() {
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center"><p>후원항목</p></li>
                     <div className="w-[353px] flex justify-between">
-                      <li className="cursor-pointer w-40 h-[43px] bg-[#f8f0e5] flex justify-center items-center"><p>일시후원</p></li>
+                      <li className="cursor-pointer w-40 h-[43px] bg-[#f8f0e5] flex justify-center items-center" ><p>일시후원</p></li>
                       <li className="cursor-pointer w-40 h-[43px] bg-[#f8f0e5] flex justify-center items-center"><p>정기후원</p></li>
                     </div>
                   </ul>
@@ -43,7 +46,7 @@ function Info() {
                       <li className='w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer'><p>30,000원</p></li>
                       <li className='w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer'><p>40,000원</p></li>
                       <li className='w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer'><p>50,000원</p></li>
-                      <li className=""><input type="text" placeholder="직접입력" onInput={NumChk}  className='w-[101px] h-[28px] flex justify-center items-center text-center border-[1px] border-black' /></li>
+                      <li className=""><input type="text" placeholder="직접입력"  onInput={NumChk}  className='w-[101px] h-[28px] flex justify-center items-center text-center border-[1px] border-black' /></li>
                     </div>
                   </ul>
                 </div>
