@@ -1,13 +1,37 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { styled } from 'styled-components';
+import "./../index.css"
 
 function Info() {
 
   const NumChk = (e)=>{
     return e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
+  const Num = (e)=>{
+    return e.target.value = e.target.value.replace(/[^0-9.]/g, '');
+  }
+
   
+  const [isActive, setIsActive] = useState(true)
+  const [Active, setActive] = useState(false)
+  const [solo, setSolo] = useState(true)
+  const [buisness, setBuisness] = useState(false)
+  const [card, setCard] = useState(true)
+  const [money, setMoney] = useState(false)
+
+  const checkedAll = (e)=>{
+    if(e.target.checked === true){
+      document.querySelectorAll("input[type='checkbox']").forEach((el)=>{
+        el.setAttribute("checked", "true") 
+      })
+      
+    }else{
+      document.querySelectorAll("input[type='checkbox']").forEach((el)=>{
+        el.removeAttribute("checked") 
+      })  
+    }
+  }
   
   return (
     <>
@@ -34,19 +58,19 @@ function Info() {
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center"><p>후원항목</p></li>
                     <div className="w-[353px] flex justify-between">
-                      <li className="cursor-pointer w-40 h-[43px] bg-[#f8f0e5] flex justify-center items-center" ><p>일시후원</p></li>
-                      <li className="cursor-pointer w-40 h-[43px] bg-[#f8f0e5] flex justify-center items-center"><p>정기후원</p></li>
+                      <li className={`cursor-pointer w-40 h-[43px] bg-[#f8f0e5] flex justify-center items-center ${isActive === true ? "color" : ""}`}  onClick={()=>{setIsActive(!isActive);setActive(false)}}><p>일시후원</p></li>
+                      <li className={`cursor-pointer w-40 h-[43px] bg-[#f8f0e5] flex justify-center items-center ${Active === true ? "color" : ""}`}  onClick={()=>{setActive(!Active);setIsActive(false)}}><p>정기후원</p></li>
                     </div>
                   </ul>
                   <ul className="flex justify-between">
                     <li className="h-[30px] flex justify-center"><p>후원금액</p></li>
                     <div className="w-[353px] h-[80px] flex justify-between flex-wrap">
-                      <li className='w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer'><p>10,000원</p></li>
-                      <li className='w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer'><p>20,000원</p></li>
-                      <li className='w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer'><p>30,000원</p></li>
-                      <li className='w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer'><p>40,000원</p></li>
-                      <li className='w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer'><p>50,000원</p></li>
-                      <li className=""><input type="text" placeholder="직접입력"  onInput={NumChk}  className='w-[101px] h-[28px] flex justify-center items-center text-center border-[1px] border-black' /></li>
+                      <li className={`w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer ${money === true ? "color" : ""}`} onClick={()=>{setMoney(money === false ? true : false)}}><p>10,000원</p></li>
+                      <li className={`w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer ${money === true ? "color" : ""}`} onClick={()=>{setMoney(money === false ? true : false)}}><p>20,000원</p></li>
+                      <li className={`w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer ${money === true ? "color" : ""}`} onClick={()=>{setMoney(money === false ? true : false)}}><p>30,000원</p></li>
+                      <li className={`w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer ${money === true ? "color" : ""}`} onClick={()=>{setMoney(money === false ? true : false)}}><p>40,000원</p></li>
+                      <li className={`w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer ${money === true ? "color" : ""}`} onClick={()=>{setMoney(money === false ? true : false)}}><p>50,000원</p></li>
+                      <li className="" onClick={()=>{setMoney(money === false ? true : false)}}><input type="text" placeholder="직접입력"  onInput={NumChk}  className='w-[101px] h-[28px] flex justify-center items-center text-center border-[1px] border-black' /></li>
                     </div>
                   </ul>
                 </div>
@@ -55,12 +79,12 @@ function Info() {
                   <ul className="flex justify-between mb-[25px]">
                     <li className='h-[43px] flex items-center'><p>구분</p></li>
                     <div className="w-[353px] flex justify-between">
-                      <li className="cursor-pointer w-40 h-[43px] bg-[#f8f0e5] flex justify-center items-center"><p>개인</p></li>
-                      <li className="cursor-pointer w-40 h-[43px] bg-[#f8f0e5] flex justify-center items-center"><p>단체(사업자)</p></li>
+                      <li className={`cursor-pointer w-40 h-[43px] bg-[#f8f0e5] flex justify-center items-center ${solo === true ? "color" : ""}`} onClick={()=>{setSolo(!solo);setBuisness(false)}}><p>개인</p></li>
+                      <li className={`cursor-pointer w-40 h-[43px] bg-[#f8f0e5] flex justify-center items-center ${buisness === true ? "color" : ""}`} onClick={()=>{setBuisness(!buisness);setSolo(false)}}><p>단체(사업자)</p></li>
                     </div>
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
-                    <li className="h-[43px] flex items-center"><p>이름</p></li>
+                    <li className="h-[43px] flex items-center" ><p>{buisness === true ? "단체(사업자명)" : "이름"}</p></li>
                     <li><input type="text" className='w-[350px] h-[43px] text-[18px] text-center border-[1px] border-black' /></li>
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
@@ -76,8 +100,8 @@ function Info() {
                           <option value="5">019</option>
                         </select>
                       </li>
-                      <li className=""><input type="text" onInput={NumChk} className='w-[95px] h-10 border-[1px] border-black text-center text-[17px]' maxLength={4} /></li>
-                      <li className=""><input type="text" onInput={NumChk} className='w-[95px] h-10 border-[1px] border-black text-center text-[17px]' maxLength={4} /></li>
+                      <li className=""><input type="text" className='w-[95px] h-10 border-[1px] border-black text-center text-[17px]' maxLength={4} onInput={Num} /></li>
+                      <li className=""><input type="text" className='w-[95px] h-10 border-[1px] border-black text-center text-[17px]' maxLength={4} onInput={Num} /></li>
                     </div>
                   </ul>
                   <ul className="flex justify-between">
@@ -90,18 +114,18 @@ function Info() {
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center"><p>결제수단</p></li>
                     <div className="w-[353px] h-[43px]">
-                      <li className='w-40 h-full bg-[#f8f0e5] flex justify-center items-center cursor-pointer'><p>신용카드</p></li>
+                      <li className={`w-40 h-full bg-[#f8f0e5] flex justify-center items-center cursor-pointer ${card === true ? "color" : ""}`} onClick={()=>setCard(card === false ? true : false)}><p>신용카드</p></li>
                     </div>
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
-                    <li className="h-[43px] flex items-center"><p>카드번호</p></li>
-                    <li className=""><input type="text" onInput={NumChk} className='w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
+                    <li className="h-[43px] flex items-center" ><p>카드번호</p></li>
+                    <li className=""><input type="text"  className='w-[350px] h-10 border-[1px] border-black text-center text-[18px]' onInput={Num} /></li>
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center"><p>유효기간</p></li>
                     <div className="w-[353px] flex justify-between">
-                      <li className=""><input type="text" placeholder='MM' maxLength={2} onInput={NumChk} className='w-[160px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
-                      <li className=""><input type="text" placeholder='YY' maxLength={2} onInput={NumChk} className='w-[160px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
+                      <li className=""><input type="text" placeholder='MM' maxLength={2}  className='w-[160px] h-10 border-[1px] border-black text-center text-[18px]' onInput={Num} /></li>
+                      <li className=""><input type="text" placeholder='YY' maxLength={2}  className='w-[160px] h-10 border-[1px] border-black text-center text-[18px]' onInput={Num} /></li>
                     </div>
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
@@ -110,13 +134,13 @@ function Info() {
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center"><p>생년월일</p></li>
-                    <li className=""><input type="text" onInput={NumChk} maxLength={6} placeholder='주민번호 앞 6자리(또는 사업자번호)' className='w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
+                    <li className=""><input type="text" onInput={Num} maxLength={6} placeholder='주민번호 앞 6자리(또는 사업자번호)' className='w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center"><p>비밀번호</p></li>
-                    <li className=""><input type="text" onInput={NumChk} maxLength={2} placeholder='카드 비밀번호 앞 2자리' className='w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
+                    <li className=""><input type="text" onInput={Num} maxLength={2} placeholder='카드 비밀번호 앞 2자리' className='w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
                   </ul>
-                  <ul className="flex justify-between mb-[25px]">
+                  <ul className='flex justify-between mb-[25px]' style={{display: Active === true ? "flex" : "none"}}>
                     <li className="h-[43px] flex items-center"><p>결제일</p></li>
                     <div className="w-[353px] h-[43px] relative">
                       <select className='w-40 h-10 text-center text-[17px] border-[1px] border-black'>
@@ -137,15 +161,15 @@ function Info() {
                 </div>
                 <div className="py-[50px] relative w-[500px]">
                   <div className="mb-[30px]">
-                    <input type="checkbox" id='all' />
-                    <label htmlFor='all' className='ml-2'>전체 동의하기</label>
+                    <input type="checkbox" id='all' onInput={checkedAll} />
+                    <label htmlFor='all' className='ml-2' >전체 동의하기</label>
                   </div>
                   <div className="mb-[10px]">
                     <input type="checkbox" id='use' />
-                    <label htmlFor='use' className='ml-2'>[필수] 이용약관 동의<NavLink to='/'>[보기]</NavLink></label>
+                    <label htmlFor='use' className='ml-2' >[필수] 이용약관 동의<NavLink to='/'>[보기]</NavLink></label>
                   </div>
                   <div className="mb-[10px]">
-                    <input type="checkbox" id='policy' />
+                    <input type="checkbox" id='policy'/>
                     <label htmlFor='policy' className='ml-2'>[필수] 이용약관 동의<NavLink to='/'>[보기]</NavLink></label>
                   </div>
                   <NavLink to='/complete' className='w-[165px] h-[43px] bg-[#dac0a3] text-white my-0 mx-auto flex justify-center items-center mt-[50px]'>결제하기</NavLink>
