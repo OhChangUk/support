@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { styled } from 'styled-components';
+import { NavLink, useNavigate } from 'react-router-dom'
+// import { styled } from 'styled-components';
 import "./../index.css"
 
 function Info() {
 
   const NumChk = (e)=>{
     return e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+  const Hyphen = (e)=>{
+    return e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/\B(?=(\d{4})+(?!\d))/g, '-');
   }
   const Num = (e)=>{
     return e.target.value = e.target.value.replace(/[^0-9.]/g, '');
@@ -19,11 +22,72 @@ function Info() {
   const [buisness, setBuisness] = useState(false)
   const [card, setCard] = useState(true)
   const [money, setMoney] = useState(-1)
+  const navigate = useNavigate();
+  const formChk = ()=>{
+      if(document.querySelector(".name").value === "" || document.querySelector(".name").value === null){
+        alert("이름이 비어있습니다.");
+        document.querySelector(".name").focus();
+        return;
+      }
+      if(document.querySelector(".middle-nb").value === "" || document.querySelector(".name").value === null){
+        alert("중간번호가 비어있습니다.");
+        document.querySelector(".middle-nb").focus();
+        return;
+      }
+      if(document.querySelector(".end-nb").value === "" || document.querySelector(".name").value === null){
+        alert("끝번호가 비어있습니다.");
+        document.querySelector(".end-nb").focus();
+        return;
+      }
+      if(document.querySelector(".e-mail").value === "" || document.querySelector(".name").value === null){
+        alert("이메일이 비어있습니다.");
+        document.querySelector(".e-mail").focus();
+        return;
+      }
+      if(document.querySelector(".card-nb").value === "" || document.querySelector(".name").value === null){
+        alert("카드번호가 비어있습니다.");
+        document.querySelector(".card-nb").focus();
+        return;
+      }
+      if(document.querySelector(".month").value === "" || document.querySelector(".name").value === null){
+        alert("유효기간(월)이 비어있습니다.");
+        document.querySelector(".month").focus();
+        return;
+      }
+      if(document.querySelector(".year").value === "" || document.querySelector(".name").value === null){
+        alert("유효기간(년)이 비어있습니다.");
+        document.querySelector(".year").focus();
+        return;
+      }
+      if(document.querySelector(".card-name").value === "" || document.querySelector(".name").value === null){
+        alert("카드주명이 비어있습니다.");
+        document.querySelector(".card-name").focus();
+        return;
+      }
+      if(document.querySelector(".birth").value === "" || document.querySelector(".name").value === null){
+        alert("생년월일이 비어있습니다.");
+        document.querySelector(".birth").focus();
+        return;
+      }
+      if(document.querySelector(".password").value === "" || document.querySelector(".name").value === null){
+        alert("비밀번호가 비어있습니다.");
+        document.querySelector(".password").focus();
+        return;
+      }
+
+
+
+
+      navigate('/complete')
+    
+  }
+  
+
 
   const checkedAll = (e)=>{
     if(e.target.checked === true){
       document.querySelectorAll("input[type='checkbox']").forEach((el)=>{
-        el.setAttribute("checked", "true") 
+        el.setAttribute("checked", "true")
       })
       
     }else{
@@ -72,7 +136,7 @@ function Info() {
                           )
                         })
                       }
-                      <li className="" onClick={()=>{setMoney(money === false ? true : false)}}><input type="text" placeholder="직접입력"  onInput={NumChk}  className='w-[101px] h-[28px] flex justify-center items-center text-center border-[1px] border-black' /></li> 
+                      <li className="" onClick={()=>{setMoney(money === false ? true : false)}}><input type="text" placeholder="직접입력"  onInput={NumChk}  className='w-[101px] h-[28px] flex justify-center items-center text-center border-[1px] border-black' maxLength={11} /></li> 
                       {/* <li className={`w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer ${money === true ? "color" : ""}`} onClick={()=>{setMoney(money === false ? true : false)}}><p>10,000원</p></li>
                       <li className={`w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer ${money === true ? "color" : ""}`} onClick={()=>{setMoney(money === false ? true : false)}}><p>20,000원</p></li>
                       <li className={`w-[105px] h-[30px] flex justify-center items-center bg-[#f8f0e5] cursor-pointer ${money === true ? "color" : ""}`} onClick={()=>{setMoney(money === false ? true : false)}}><p>30,000원</p></li>
@@ -93,7 +157,7 @@ function Info() {
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center" ><p>{buisness === true ? "단체(사업자명)" : "이름"}</p></li>
-                    <li><input type="text" className='w-[350px] h-[43px] text-[18px] text-center border-[1px] border-black' /></li>
+                    <li><input type="text"  className='name w-[350px] h-[43px] text-[18px] text-center border-[1px] border-black' /></li>
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center"><p>전화번호</p></li>
@@ -108,13 +172,13 @@ function Info() {
                           <option value="5">019</option>
                         </select>
                       </li>
-                      <li className=""><input type="text" className='w-[95px] h-10 border-[1px] border-black text-center text-[17px]' maxLength={4} onInput={Num} /></li>
-                      <li className=""><input type="text" className='w-[95px] h-10 border-[1px] border-black text-center text-[17px]' maxLength={4} onInput={Num} /></li>
+                      <li className=""><input type="text" className='middle-nb w-[95px] h-10 border-[1px] border-black text-center text-[17px]' maxLength={4} onInput={Num} /></li>
+                      <li className=""><input type="text" className='end-nb w-[95px] h-10 border-[1px] border-black text-center text-[17px]' maxLength={4} onInput={Num} /></li>
                     </div>
                   </ul>
                   <ul className="flex justify-between">
                     <li className="h-[43px] flex items-center"><p>이메일</p></li>
-                    <li className=""><input type="text" pattern='e-mail' className='w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
+                    <li className=""><input type="text" className='e-mail w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
                   </ul>
                 </div>
                 <div className="info w-[500px] relative py-[50px] info">
@@ -127,26 +191,26 @@ function Info() {
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center" ><p>카드번호</p></li>
-                    <li className=""><input type="text"  className='w-[350px] h-10 border-[1px] border-black text-center text-[18px]' onInput={Num} /></li>
+                    <li className=""><input type="text"  className='card-nb w-[350px] h-10 border-[1px] border-black text-center text-[18px]' onInput={Hyphen} maxLength={19} /></li>
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center"><p>유효기간</p></li>
                     <div className="w-[353px] flex justify-between">
-                      <li className=""><input type="text" placeholder='MM' maxLength={2}  className='w-[160px] h-10 border-[1px] border-black text-center text-[18px]' onInput={Num} /></li>
-                      <li className=""><input type="text" placeholder='YY' maxLength={2}  className='w-[160px] h-10 border-[1px] border-black text-center text-[18px]' onInput={Num} /></li>
+                      <li className=""><input type="text" placeholder='MM' maxLength={2}  className='month w-[160px] h-10 border-[1px] border-black text-center text-[18px]' onInput={Num} /></li>
+                      <li className=""><input type="text" placeholder='YY' maxLength={2}  className='year w-[160px] h-10 border-[1px] border-black text-center text-[18px]' onInput={Num} /></li>
                     </div>
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center"><p>카드주명</p></li>
-                    <li className=""><input type="text" className='w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
+                    <li className=""><input type="text" className='card-name w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center"><p>생년월일</p></li>
-                    <li className=""><input type="text" onInput={Num} maxLength={6} placeholder='주민번호 앞 6자리(또는 사업자번호)' className='w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
+                    <li className=""><input type="text" onInput={Num} maxLength={buisness === true ? 10 : 6} placeholder='주민번호 앞 6자리(또는 사업자번호)' className='birth w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
                   </ul>
                   <ul className="flex justify-between mb-[25px]">
                     <li className="h-[43px] flex items-center"><p>비밀번호</p></li>
-                    <li className=""><input type="text" onInput={Num} maxLength={2} placeholder='카드 비밀번호 앞 2자리' className='w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
+                    <li className=""><input type="text" onInput={Num} maxLength={2} placeholder='카드 비밀번호 앞 2자리' className='password w-[350px] h-10 border-[1px] border-black text-center text-[18px]' /></li>
                   </ul>
                   <ul className='flex justify-between mb-[25px]' style={{display: Active === true ? "flex" : "none"}}>
                     <li className="h-[43px] flex items-center"><p>결제일</p></li>
@@ -160,6 +224,7 @@ function Info() {
                   </ul>
                   <ul className="w-full block bg-[#f8f0e5] py-[30px] pl-5">
                     <li className='font-bold mb-[10px]'><p>[출금정책 안내]</p></li>
+                    <li className='text-[13px] mb-[5px]'><p>* 일시후원은 당일 바로 결제됩니다.</p></li>
                     <li className='text-[13px] mb-[5px]'><p>* 정기출금일은 매월 10, 20, 30일입니다.</p></li>
                     <li className='text-[13px] mb-[5px]'><p>* 첫 후원금은 지정일이 아닌 가까운 정기출금일에 출금될 수 있습니다.</p></li>
                     <li className='text-[13px] mb-[5px] text-[#a37541]'><p>예) 지정일은 10일이나 첫 후원금은 30일에 출금</p></li>
@@ -180,7 +245,7 @@ function Info() {
                     <input type="checkbox" id='policy'/>
                     <label htmlFor='policy' className='ml-2'>[필수] 이용약관 동의<NavLink to='/'>[보기]</NavLink></label>
                   </div>
-                  <NavLink to='/complete' className='w-[165px] h-[43px] bg-[#dac0a3] text-white my-0 mx-auto flex justify-center items-center mt-[50px]'>결제하기</NavLink>
+                  <button onClick={formChk} className='w-[165px] h-[43px] bg-[#dac0a3] text-white my-0 mx-auto flex justify-center items-center mt-[50px]' >결제하기</button>
                 </div>
             </div>
         </div>
